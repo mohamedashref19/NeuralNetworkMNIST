@@ -1,3 +1,5 @@
+package main.java;
+
 public class Matrix {
     private double[][] data;
     private int rows;

@@ -1,3 +1,5 @@
+package main.java;
+
 public class ActivationFunctions {
 
     public static double sigmoid(double x) {
@@ -57,6 +59,7 @@ public class ActivationFunctions {
         return result;
     }
 
+    // ✅ Softmax (stable)
     public static Matrix applySoftmax(Matrix input) {
         Matrix result = new Matrix(input.getRows(), input.getCols());
 

@@ -1,3 +1,5 @@
+package main.java;
+
 import java.io.*;
 import java.util.*;
 
@@ -36,7 +38,8 @@ public class Main {
 
         NeuralNetwork nn = new NeuralNetwork(784, 64, 10, 0.1);
 
-        nn.train(trainInputs, trainTargets, 10); // 10 epochs
+        nn.train(trainInputs, trainTargets, 10, 32); // 10 epochs, batch size 32
+
 
         Matrix[] testInputs = new Matrix[testImages.size()];
         Matrix[] testTargets = new Matrix[testLabels.size()];

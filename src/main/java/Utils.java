@@ -1,3 +1,5 @@
+package main.java;
+
 public class Utils {
     public static void printMatrix(Matrix m) {
         for (int i = 0; i < m.getRows(); i++) {
