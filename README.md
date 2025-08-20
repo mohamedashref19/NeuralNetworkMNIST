@@ -76,7 +76,7 @@ A Java-based implementation of a simple feedforward neural network from scratch 
 [Kaggle MNIST CSV Dataset](https://www.kaggle.com/datasets/oddrationale/mnist-in-csv)
 
 ## Deliverables
-### ✅ Java source code (with comments)
+### ✅ Java source code 
 
 ### ✅ README documentation
 
