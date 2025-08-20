@@ -5,11 +5,14 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        System.out.println("🚀 Loading MNIST dataset...");
+
         List<double[]> trainImages = loadImages("data/mnist_train.csv");
         List<double[]> trainLabels = loadLabels("data/mnist_train.csv");
         List<double[]> testImages = loadImages("data/mnist_test.csv");
         List<double[]> testLabels = loadLabels("data/mnist_test.csv");
 
+        System.out.println("✅ Dataset loaded successfully!");
         System.out.println("Train images: " + trainImages.size());
         System.out.println("Train labels: " + trainLabels.size());
         System.out.println("Test images: " + testImages.size());
@@ -20,6 +23,8 @@ public class Main {
             return;
         }
 
+        // Convert to Matrix format
+        System.out.println("🔄 Converting data to Matrix format...");
         Matrix[] trainInputs = new Matrix[trainImages.size()];
         Matrix[] trainTargets = new Matrix[trainLabels.size()];
 
@@ -36,11 +41,27 @@ public class Main {
             }
         }
 
-        NeuralNetwork nn = new NeuralNetwork(784, 64, 10, 0.1, 0.9);
-
-        nn.train(trainInputs, trainTargets, 10, 32); // 10 epochs, batch size 32
 
 
+        int hiddenSize = 128;
+        double learningRate = 0.01;
+        double momentum = 0.9;
+        int epochs = 11;
+        int batchSize = 64;
+
+        System.out.println("🧠 Creating Neural Network...");
+        NeuralNetwork nn = new NeuralNetwork(784, hiddenSize, 10, learningRate, momentum);
+
+        nn.printNetworkInfo();
+
+        long startTime = System.currentTimeMillis();
+        nn.train(trainInputs, trainTargets, epochs, batchSize);
+        long trainingTime = System.currentTimeMillis() - startTime;
+
+        System.out.println("⏱️ Training completed in: " + (trainingTime / 1000.0) + " seconds");
+
+        // Convert test data to Matrix format
+        System.out.println("🔄 Preparing test data...");
         Matrix[] testInputs = new Matrix[testImages.size()];
         Matrix[] testTargets = new Matrix[testLabels.size()];
 
@@ -57,8 +78,10 @@ public class Main {
             }
         }
 
-        // الاختبار
+        // Testing
         nn.test(testInputs, testTargets);
+
+        System.out.println("🎉 Program completed successfully!");
     }
 
     private static List<double[]> loadImages(String path) throws IOException {
@@ -95,7 +118,7 @@ public class Main {
                 }
                 String[] parts = line.split(",");
                 if (parts.length < 785) continue;
-                double[] label = new double[10];
+                double[] label = new double[10]; // One-hot encoding
                 int digit = Integer.parseInt(parts[0]);
                 label[digit] = 1.0;
                 labels.add(label);

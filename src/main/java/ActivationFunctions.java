@@ -59,7 +59,6 @@ public class ActivationFunctions {
         return result;
     }
 
-    // ✅ Softmax (stable)
     public static Matrix applySoftmax(Matrix input) {
         Matrix result = new Matrix(input.getRows(), input.getCols());
 
