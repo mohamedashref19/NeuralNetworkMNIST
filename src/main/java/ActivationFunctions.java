@@ -1,3 +1,5 @@
+package main.java;
+
 public class ActivationFunctions {
 
     public static double sigmoid(double x) {
